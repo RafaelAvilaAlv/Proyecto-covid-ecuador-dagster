@@ -3,3 +3,10 @@ __pycache__/
 .dagster/
 out/
 data/
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Dagster tmp
+.tmp_dagster_home*/
