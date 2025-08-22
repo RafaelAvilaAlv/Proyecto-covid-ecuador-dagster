@@ -10,3 +10,4 @@ __pycache__/
 
 # Dagster tmp
 .tmp_dagster_home*/
+data/owid_raw.csv
