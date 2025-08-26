@@ -65,3 +65,38 @@ Sanidad del rango de la incidencia (detección de valores imposibles/erróneos).
 + requirements.txt incluye (resumen):
 + dagster>=1.6, dagster-webserver>=1.6, pandas>=2.1, requests>=2.31,
 + duckdb>=1.0, pyarrow>=15, openpyxl>=3.1.
+
+
+5) Ejecución
+# 1) Instalar
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+# 2) Variables de entorno (países y fallback)
+export PYTHONPATH=src
+export PAISES_1="Ecuador"
+export PAISES_2="Peru"
+export OWID_URL_FALLBACK="https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv"
+
+# 3) Levantar la UI de Dagster
+dagster dev -m covid_ec.defs
+
+
+Abre la UI (por defecto http://127.0.0.1:3000), entra a Assets → Materialize all (o “Open launchpad”) y ejecuta.
+La salida quedará en out/reporte_covid.xlsx.
+
+
+6) Datos
++ Fuente principal: Our World in Data (OWID) – COVID-19 dataset.
++ Fallback: raw de GitHub de OWID (útil cuando el DNS de covid.ourworldindata.org falla).
++ Licencia de datos: consultar OWID (usualmente CC BY). Citar la fuente cuando se usen tablas o gráficos.
+
+7) Salidas y validación
+- Excel: out/reporte_covid.xlsx (2 hojas: metrica_incidencia_7d, metrica_factor_crec_7d).
+- Metadata en Dagster: cada asset muestra rutas de almacenamiento y logs.
+- Checks: si check_entrada_basica marca Failed, revisar:
+  + columnas clave vacías o nulas
+  + fechas inválidas (muy antiguas/futuras)
+  + población <= 0 o duplicados inesperados
+  + si falla la descarga principal, verificar que se usó el fallback.
