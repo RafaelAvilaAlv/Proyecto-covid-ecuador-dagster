@@ -51,23 +51,23 @@ El proyecto está modelado como **assets** (recursos) y **checks** (controles) d
 ---
 
 ## 3) Estructura del repositorio
+
+```
 .
 ├─ src/
-│ └─ covid_ec/
-│ ├─ defs/ # Definitions (entrypoint de Dagster)
-│ ├─ init.py
-│ ├─ assets.py # Assets y checks del pipeline
-│ └─ definitions.py # Ensambla assets + checks en Definitions
+│  └─ covid_ec/
+│     ├─ defs/                # Definitions (entrypoint de Dagster)
+│     ├─ __init__.py
+│     ├─ assets.py            # Assets y checks del pipeline
+│     └─ definitions.py       # Ensambla assets + checks en Definitions
 ├─ scripts/
-│ └─ eda_inicial.py # (opcional) Descarga/EDA manual para diagnóstico rápido
+│  └─ eda_inicial.py          # (opcional) Descarga/EDA manual para diagnóstico rápido
 ├─ out/
-│ └─ reporte_covid.xlsx # Salida final (git-ignored)
-├─ data/ # CSVs generados por EDA (git-ignored)
+│  └─ reporte_covid.xlsx      # Salida final (git-ignored)
+├─ data/                      # CSVs generados por EDA (git-ignored)
 ├─ requirements.txt
 └─ README.md
-
-
-
+```
 
 > `data/` y `out/` están en `.gitignore` para no versionar datos pesados o derivados.
 
@@ -92,5 +92,86 @@ python -m venv .venv
 source .venv/bin/activate
 python -m pip install -U pip
 pip install -r requirements.txt
+```
 
+**Windows (PowerShell)**
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate
+python -m pip install -U pip
+pip install -r requirements.txt
+```
 
+### 5.2 Variables de entorno (países y fallback)
+
+**Linux/macOS**
+```bash
+export PYTHONPATH=src
+export PAISES_1="Ecuador"
+export PAISES_2="Peru"
+export OWID_URL_FALLBACK="https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv"
+```
+
+**Windows (PowerShell)**
+```powershell
+$env:PYTHONPATH="src"   # para la sesión actual
+$env:PAISES_1="Ecuador"
+$env:PAISES_2="Peru"
+$env:OWID_URL_FALLBACK="https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv"
+# (opcional) persistir: setx PYTHONPATH "src"
+```
+
+> Puedes ajustar `PAISES_1`, `PAISES_2`, etc., según los países a analizar.
+
+### 5.3 Levantar la UI de Dagster
+
+```bash
+dagster dev -m covid_ec.defs
+```
+
+Luego abre `http://127.0.0.1:3000`, entra a **Assets** → **Materialize all** (o “Open launchpad”) y ejecuta.  
+La salida quedará en `out/reporte_covid.xlsx`.
+
+---
+
+## 6) Datos
+
+- Fuente principal: Our World in Data (OWID) – COVID-19 dataset.
+- Fallback: raw de GitHub de OWID (útil cuando falla el DNS de `covid.ourworldindata.org`).
+- Licencia de datos: consultar OWID (usualmente CC BY). Citar la fuente al usar tablas o gráficos.
+
+---
+
+## 7) Salidas y validación
+
+- Excel: `out/reporte_covid.xlsx`  
+  - Hojas: `metrica_incidencia_7d`, `metrica_factor_crec_7d`
+- Metadata en Dagster: cada asset muestra rutas de almacenamiento y logs.
+- Checks: si `check_entrada_basica` marca Failed, revisar:
+  - columnas clave vacías o nulas
+  - fechas inválidas (muy antiguas o futuras)
+  - población <= 0 o duplicados inesperados
+  - si falla la descarga principal, verificar que se usó el fallback
+
+---
+
+## 8) Troubleshooting
+
+- Error DNS o descarga OWID  
+  Verifica que `OWID_URL_FALLBACK` esté configurado (ver 5.2).
+
+- No se ve el módulo (imports fallan)  
+  Asegura `PYTHONPATH=src` (o `$env:PYTHONPATH="src"` en PowerShell).
+
+- Excel vacío o incompleto  
+  Confirma que los assets aguas arriba se materializaron con éxito y que los checks están OK.
+
+- Re-ejecución limpia  
+  En la UI: **Assets → Materialize all**. Revisa **Runs** y **Events** para auditar pasos.
+
+---
+
+## 9) Créditos
+
+- Autores: Rafael Ávila, José Morocho
+- Dataset: Our World in Data (OWID) – COVID-19
