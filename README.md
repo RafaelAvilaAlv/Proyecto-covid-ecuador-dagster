@@ -34,7 +34,6 @@ Factor de crecimiento = casos 7d actuales / casos 7d previos (shift 7).
 Exporta las métricas a out/reporte_covid.xlsx (2 hojas: incidencias y factor de crecimiento).
 
 Checks
-
 + check_entrada_basica (sobre leer_datos)
 Claves no nulas, población > 0, fechas válidas y sin duplicados.
 + check_incidencia_rango (sobre metrica_incidencia_7d)
