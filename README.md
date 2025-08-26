@@ -13,7 +13,7 @@ Calculamos métricas epidemiológicas (incidencia 7d y factor de crecimiento 7d)
 Exporte un reporte en Excel con las métricas y controles de calidad.
 
 
-2) Arquitectura (Dagster)
+2. Arquitectura (Dagster)
 
 El proyecto está modelado como assets (recursos) y checks (controles) de Dagster:
 - Assets
@@ -39,7 +39,7 @@ Claves no nulas, población > 0, fechas válidas y sin duplicados.
 + check_incidencia_rango (sobre metrica_incidencia_7d)
 Sanidad del rango de la incidencia (detección de valores imposibles/erróneos).
 
-3) Estructura del repo
+3. Estructura del repo
 .
 ├─ src/
 │  └─ covid_ec/
@@ -57,14 +57,14 @@ Sanidad del rango de la incidencia (detección de valores imposibles/erróneos).
 
 + data/ y out/ están en .gitignore para no versionar datos pesados/derivados.
 
-4) Requisitos
+4. Requisitos
 + Python 3.11
 + requirements.txt incluye (resumen):
 + dagster>=1.6, dagster-webserver>=1.6, pandas>=2.1, requests>=2.31,
 + duckdb>=1.0, pyarrow>=15, openpyxl>=3.1.
 
 
-5) Ejecución
+5. Ejecución
 # 1) Instalar
 python -m venv .venv
 source .venv/bin/activate
@@ -84,12 +84,12 @@ Abre la UI (por defecto http://127.0.0.1:3000), entra a Assets → Materialize a
 La salida quedará en out/reporte_covid.xlsx.
 
 
-6) Datos
+6. Datos
 + Fuente principal: Our World in Data (OWID) – COVID-19 dataset.
 + Fallback: raw de GitHub de OWID (útil cuando el DNS de covid.ourworldindata.org falla).
 + Licencia de datos: consultar OWID (usualmente CC BY). Citar la fuente cuando se usen tablas o gráficos.
 
-7) Salidas y validación
+7. Salidas y validación
 - Excel: out/reporte_covid.xlsx (2 hojas: metrica_incidencia_7d, metrica_factor_crec_7d).
 - Metadata en Dagster: cada asset muestra rutas de almacenamiento y logs.
 - Checks: si check_entrada_basica marca Failed, revisar:
@@ -98,7 +98,7 @@ La salida quedará en out/reporte_covid.xlsx.
   + población <= 0 o duplicados inesperados
   + si falla la descarga principal, verificar que se usó el fallback.
  
-8) Troubleshooting
+8. Troubleshooting
 + Error DNS/descarga OWID
 Usa OWID_URL_FALLBACK (ya configurado arriba).
 + No se ve el módulo
