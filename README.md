@@ -51,4 +51,46 @@ El proyecto está modelado como **assets** (recursos) y **checks** (controles) d
 ---
 
 ## 3) Estructura del repositorio
+.
+├─ src/
+│ └─ covid_ec/
+│ ├─ defs/ # Definitions (entrypoint de Dagster)
+│ ├─ init.py
+│ ├─ assets.py # Assets y checks del pipeline
+│ └─ definitions.py # Ensambla assets + checks en Definitions
+├─ scripts/
+│ └─ eda_inicial.py # (opcional) Descarga/EDA manual para diagnóstico rápido
+├─ out/
+│ └─ reporte_covid.xlsx # Salida final (git-ignored)
+├─ data/ # CSVs generados por EDA (git-ignored)
+├─ requirements.txt
+└─ README.md
+
+
+
+
+> `data/` y `out/` están en `.gitignore` para no versionar datos pesados o derivados.
+
+---
+
+## 4) Requisitos
+
+- Python 3.11 o superior
+- Dependencias (resumen de `requirements.txt`):  
+  `dagster>=1.6`, `dagster-webserver>=1.6`, `pandas>=2.1`, `requests>=2.31`,  
+  `duckdb>=1.0`, `pyarrow>=15`, `openpyxl>=3.1`
+
+---
+
+## 5) Instalación y ejecución
+
+### 5.1 Crear entorno e instalar dependencias
+
+**Linux/macOS**
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+pip install -r requirements.txt
+
 
