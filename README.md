@@ -100,3 +100,13 @@ La salida quedará en out/reporte_covid.xlsx.
   + fechas inválidas (muy antiguas/futuras)
   + población <= 0 o duplicados inesperados
   + si falla la descarga principal, verificar que se usó el fallback.
+ 
+8) Troubleshooting
++ Error DNS/descarga OWID
+Usa OWID_URL_FALLBACK (ya configurado arriba).
++ No se ve el módulo
+Asegúrate de configurar PYTHONPATH=src (o $env:PYTHONPATH="src" en PowerShell). 
++ Excel vacío o incompleto
+Verifica que los assets aguas arriba se materializaron con éxito y que los checks están OK.
++ Re-ejecución limpia
+Desde la UI: Assets → Materialize all. Puedes inspeccionar “Runs” y “Events” para ver los pasos.
