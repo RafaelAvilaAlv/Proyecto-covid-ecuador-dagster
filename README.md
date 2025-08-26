@@ -3,7 +3,7 @@
 Pipeline reproducible de datos COVID-19 (Ecuador y comparativo regional) construido con **Dagster**, con exportación a **Excel** y controles de calidad.
 
 - **Curso:** Python – Análisis de Datos y Ecosistemas Modernos de Analítica
-- **Integrantes:** Rafael Ávila, José Morocho
+- **Integrantes:** Rafael Avila, José Morocho
 - **Tema:** Pipeline de datos COVID-19 (Ecuador y comparativo regional) con Dagster y salida a Excel
 
 ---
@@ -11,10 +11,10 @@ Pipeline reproducible de datos COVID-19 (Ecuador y comparativo regional) constru
 ## 1) Objetivo
 
 Construir un pipeline que:
-- Descargue los datos públicos de COVID-19 de **Our World in Data (OWID)**.
-- Filtre y procese países seleccionados.
-- Calcule métricas epidemiológicas (incidencia 7d y factor de crecimiento 7d).
-- Exporte un **reporte en Excel** con métricas y resultados de controles.
+- Se descargua los datos públicos de COVID-19 de **Our World in Data (OWID)**.
+- Se filtra y se procesa países seleccionados.
+- Calculamos métricas epidemiológicas (incidencia 7d y factor de crecimiento 7d).
+- Exportamos un **reporte en Excel** con métricas y resultados de controles.
 
 ---
 
@@ -86,15 +86,6 @@ El proyecto está modelado como **assets** (recursos) y **checks** (controles) d
 
 ### 5.1 Crear entorno e instalar dependencias
 
-**Linux/macOS**
-```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-pip install -r requirements.txt
-```
-
-**Windows (PowerShell)**
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate
@@ -104,15 +95,6 @@ pip install -r requirements.txt
 
 ### 5.2 Variables de entorno (países y fallback)
 
-**Linux/macOS**
-```bash
-export PYTHONPATH=src
-export PAISES_1="Ecuador"
-export PAISES_2="Peru"
-export OWID_URL_FALLBACK="https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv"
-```
-
-**Windows (PowerShell)**
 ```powershell
 $env:PYTHONPATH="src"   # para la sesión actual
 $env:PAISES_1="Ecuador"
