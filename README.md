@@ -1,8 +1,12 @@
 Proyecto-covid-ecuador-dagster
 
-- Curso: Python – Análisis de Datos y Ecosistemas Modernos de Analítica
-- Integrantes: Rafael Ávila, José Morocho
-- Tema: Pipeline de datos COVID-19 (Ecuador y comparativo regional) con Dagster y salida a Excel.
+Pipeline reproducible de datos COVID-19 (Ecuador y comparativo regional) construido con Dagster, con exportación a Excel y controles de calidad.
+
+Curso: Python – Análisis de Datos y Ecosistemas Modernos de Analítica
+
+Integrantes: Rafael Ávila, José Morocho
+
+Tema: Pipeline de datos COVID-19 (Ecuador y comparativo regional) con Dagster y salida a Excel
 
 - 1) Objetivo
 
@@ -13,7 +17,7 @@ Calculamos métricas epidemiológicas (incidencia 7d y factor de crecimiento 7d)
 Exporte un reporte en Excel con las métricas y controles de calidad.
 
 
-2. Arquitectura (Dagster)
+ Arquitectura (Dagster)
 
 El proyecto está modelado como assets (recursos) y checks (controles) de Dagster:
 - Assets
