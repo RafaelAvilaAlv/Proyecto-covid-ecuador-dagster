@@ -152,8 +152,3 @@ La salida quedará en `out/reporte_covid.xlsx`.
   En la UI: **Assets → Materialize all**. Revisa **Runs** y **Events** para auditar pasos.
 
 ---
-
-## 9) Créditos
-
-- Autores: Rafael Ávila, José Morocho
-- Dataset: Our World in Data (OWID) – COVID-19
