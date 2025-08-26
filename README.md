@@ -39,10 +39,7 @@ Claves no nulas, población > 0, fechas válidas y sin duplicados.
 + check_incidencia_rango (sobre metrica_incidencia_7d)
 Sanidad del rango de la incidencia (detección de valores imposibles/erróneos).
 
-
-
 3) Estructura del repo
-
 .
 ├─ src/
 │  └─ covid_ec/
