@@ -38,3 +38,30 @@ Checks
 Claves no nulas, población > 0, fechas válidas y sin duplicados.
 + check_incidencia_rango (sobre metrica_incidencia_7d)
 Sanidad del rango de la incidencia (detección de valores imposibles/erróneos).
+
+
+
+3) Estructura del repo
+
+.
+├─ src/
+│  └─ covid_ec/
+│     ├─ defs/                # Definición de Definitions (entrypoint de Dagster)
+│     ├─ __init__.py
+│     ├─ assets.py            # Assets y checks del pipeline
+│     └─ definitions.py       # Ensambla assets + checks en Definitions
+├─ scripts/
+│  └─ eda_inicial.py          # (opcional) Descarga/EDA manual para diagnóstico rápido
+├─ out/
+│  └─ reporte_covid.xlsx      # Salida final (git-ignored)
+├─ data/                      # Archivos CSV generados por EDA (git-ignored)
+├─ requirements.txt
+└─ README.md
+
++ data/ y out/ están en .gitignore para no versionar datos pesados/derivados.
+
+4) Requisitos
++ Python 3.11
++ requirements.txt incluye (resumen):
++ dagster>=1.6, dagster-webserver>=1.6, pandas>=2.1, requests>=2.31,
++ duckdb>=1.0, pyarrow>=15, openpyxl>=3.1.
