@@ -3,7 +3,7 @@
 Pipeline reproducible de datos COVID-19 (Ecuador y comparativo regional) construido con **Dagster**, con exportación a **Excel** y controles de calidad.
 
 - **Curso:** Python – Análisis de Datos y Ecosistemas Modernos de Analítica
-- **Integrantes:** Rafael Avila, José Morocho, karla Mendez 
+- **Integrantes:** Rafael Avila, José Morocho, Karla Méndez 
 - **Tema:** Pipeline de datos COVID-19 (Ecuador y comparativo regional) con Dagster y salida a Excel
 
 ---
